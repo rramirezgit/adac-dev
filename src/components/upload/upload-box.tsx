@@ -1,0 +1,71 @@
+import { useDropzone } from 'react-dropzone';
+// @mui
+import { alpha, useTheme } from '@mui/material/styles';
+/* eslint-disable import/order */
+import { Box } from 'src/components/Box/box-component';
+//
+import Iconify from '../iconify';
+//
+import { UploadProps } from './types';
+
+// ----------------------------------------------------------------------
+
+export default function UploadBox({ placeholder, error, disabled, sx, ...other }: UploadProps) {
+  const { getRootProps, getInputProps, isDragActive, isDragReject } = useDropzone({
+    disabled,
+    accept: {
+      'image/*': [],
+    },
+    ...other,
+  });
+
+  const Theme = useTheme();
+
+  const hasError = isDragReject || error;
+
+  return (
+    <Box
+      {...getRootProps()}
+      sx={{
+        m: 0.5,
+        width: 64,
+        height: 64,
+        flexShrink: 0,
+        display: 'flex',
+        borderRadius: 1,
+        cursor: 'pointer',
+        alignItems: 'center',
+        color: 'text.disabled',
+        justifyContent: 'center',
+        bgcolor: (theme) => alpha(theme.palette.grey[500], 0.08),
+        border: (theme) => `dashed 1px ${alpha(theme.palette.grey[500], 0.16)}`,
+        ...(isDragActive && {
+          opacity: 0.72,
+        }),
+        ...(disabled && {
+          opacity: 0.48,
+          pointerEvents: 'none',
+        }),
+        ...(hasError && {
+          color: 'error.main',
+          borderColor: 'error.main',
+          bgcolor: (theme) => alpha(theme.palette.error.main, 0.08),
+        }),
+        '&:hover': {
+          opacity: 0.72,
+        },
+        ...sx,
+      }}
+    >
+      <input {...getInputProps()} />
+
+      {placeholder || (
+        <Iconify
+          icon="eva:cloud-upload-fill"
+          width={28}
+          color={alpha(Theme.palette.primary.main, 0.9)}
+        />
+      )}
+    </Box>
+  );
+}
