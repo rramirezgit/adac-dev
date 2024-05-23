@@ -3,8 +3,12 @@ import { LoadingButton } from '@mui/lab';
 import { Autocomplete, TextField, Typography, Button, InputAdornment } from '@mui/material';
 import { useField, useFormikContext } from 'formik';
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Box } from 'src/components/Box/box-component';
 import Iconify from 'src/components/iconify';
+import Image from 'src/components/image';
+import { useResponsive } from 'src/hooks/use-responsive';
+import { RootState } from 'src/store';
 
 interface Country {
   code: string;
@@ -38,6 +42,10 @@ export default function WhatsAppRegister({ nameFORMIK, placeholder }: WhatsAppRe
   const [valueTextField, setValue] = useState('');
   const [disabled, setDisabled] = useState(true);
   const [selectedCountry, setSelectedCountry] = useState<Country>(countries[0]);
+
+  const showWhatsApp = useSelector((state: RootState) => state.OnBoarding.swhoWhatsApp);
+
+  const smUp = useResponsive('down', 'lg');
 
   const applyMask = (value: string, mask: string): string => {
     let maskedValue = '';
@@ -77,7 +85,7 @@ export default function WhatsAppRegister({ nameFORMIK, placeholder }: WhatsAppRe
   };
 
   return (
-    <>
+    <Box sx={{}}>
       <Box
         sx={{
           display: 'flex',
@@ -115,7 +123,13 @@ export default function WhatsAppRegister({ nameFORMIK, placeholder }: WhatsAppRe
             setValue('');
             helper.setValue('');
           }}
-          sx={{ width: 150, mr: 2 }}
+          sx={{
+            width: 150,
+            mr: 2,
+            '& .MuiOutlinedInput-root': {
+              paddingRight: '17px !important',
+            },
+          }}
         />
         <TextField
           variant="outlined"
@@ -158,6 +172,13 @@ export default function WhatsAppRegister({ nameFORMIK, placeholder }: WhatsAppRe
         Recibir vía WhatsApp
       </LoadingButton>
       <Button sx={{ mt: 1, width: '100%', color: '#00bcd4', height: '48px' }}>Omitir</Button>
-    </>
+      {showWhatsApp && smUp && (
+        <Image
+          src="/assets/images/onboarding/cel-mobile.svg"
+          alt="whatsapp"
+          sx={{ mt: 2, width: '100%' }}
+        />
+      )}
+    </Box>
   );
 }

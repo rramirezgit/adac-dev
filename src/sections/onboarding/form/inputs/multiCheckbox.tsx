@@ -79,7 +79,7 @@ export default function OnBoardingMultiCheckbox({ nameFORMIK }: Props) {
         flexDirection: 'column',
         gap: '10px',
         overflowY: 'auto',
-        maxHeight: 'clamp(300px, 60vh, 400px)',
+        maxHeight: { xs: 'none', md: 'clamp(300px, 60vh, 400px)' },
       }}
     >
       {options.map((item) => (

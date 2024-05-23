@@ -22,6 +22,7 @@ import { HEADER } from '../config-layout';
 import { HeaderShadow } from '../_common';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store';
+import { useResponsive } from 'src/hooks/use-responsive';
 
 // ----------------------------------------------------------------------
 
@@ -33,6 +34,8 @@ export default function OnBoardingLayout({ children }: Props) {
   const pathname = usePathname();
   const showWhatsApp = useSelector((state: RootState) => state.OnBoarding.swhoWhatsApp);
 
+  const smDow = useResponsive('down', 'lg');
+
   const isHome = pathname === '/';
 
   return (
@@ -43,7 +46,7 @@ export default function OnBoardingLayout({ children }: Props) {
         height: 1,
       }}
     >
-      {!showWhatsApp && <Header />}
+      {(!showWhatsApp || smDow) && <Header />}
 
       <Main
         sx={{
@@ -79,11 +82,6 @@ function Header() {
             duration: theme.transitions.duration.shorter,
           }),
           backgroundColor: alpha(theme.palette.background.paper, 0.99),
-          ...(offsetTop && {
-            height: {
-              md: HEADER.H_DESKTOP_OFFSET,
-            },
-          }),
         }}
       >
         <Logo />

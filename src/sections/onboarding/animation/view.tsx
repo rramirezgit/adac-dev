@@ -117,11 +117,11 @@ export default function AnimationOnboarding() {
       {seccionesForm.map((name, index) => (
         <Box
           key={name}
-          onClick={() => rotateToSection(index)}
+          // onClick={() => rotateToSection(index)}
           sx={{
             color: step === index ? 'white' : 'primary.main',
             fontWeight: step === index ? 'bold' : 'normal',
-            cursor: 'pointer',
+            // cursor: 'pointer',
             textAlign: 'end',
             position: 'absolute',
             zIndex: 1,
@@ -140,10 +140,10 @@ export default function AnimationOnboarding() {
               (-index * 3) / 2
             }px, 0px)`,
             width: '95%',
-            '&:hover': {
-              color: 'white',
-              fontWeight: 'bold',
-            },
+            // '&:hover': {
+            //   color: 'white',
+            //   fontWeight: 'bold',
+            // },
           }}
         >
           {name}

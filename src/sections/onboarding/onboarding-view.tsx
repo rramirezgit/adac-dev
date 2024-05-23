@@ -24,12 +24,10 @@ export default function OnboardingView() {
         alignItems: 'center',
         overflow: 'hidden',
 
-        padding: showWhatsApp
-          ? 0
-          : {
-              xs: `${HEADER.H_DESKTOP + 20}px 0px 0px 0px`,
-              md: `${HEADER.H_DESKTOP + 25}px 0px 0px 0px`,
-            },
+        padding: {
+          xs: `${HEADER.H_DESKTOP + 20}px 0px 0px 0px`,
+          md: `${HEADER.H_DESKTOP + 25}px 0px 0px 0px`,
+        },
       }}
     >
       {mdUp && !showWhatsApp && (
