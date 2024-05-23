@@ -3,7 +3,6 @@
 import { alpha, useTheme } from '@mui/material/styles';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ba } from '@fullcalendar/core/internal-common';
 import { Box } from 'src/components/Box/box-component';
 import Iconify from 'src/components/iconify/iconify';
 import { RootState } from 'src/store';
@@ -128,7 +127,7 @@ export default function AnimationOnboarding() {
             zIndex: 1,
             transition: 'all 0.3s ease-in-out',
             backgroundImage: step === index ? 'url(assets/background/onboarding.svg)' : 'none',
-            backgroundSize: '35% 100%',
+            backgroundSize: '36% 100%',
 
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'right center',

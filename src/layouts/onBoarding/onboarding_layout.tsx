@@ -20,6 +20,8 @@ import Logo from 'src/components/logo';
 import { HEADER } from '../config-layout';
 //
 import { HeaderShadow } from '../_common';
+import { useSelector } from 'react-redux';
+import { RootState } from 'src/store';
 
 // ----------------------------------------------------------------------
 
@@ -29,12 +31,19 @@ type Props = {
 
 export default function OnBoardingLayout({ children }: Props) {
   const pathname = usePathname();
+  const showWhatsApp = useSelector((state: RootState) => state.OnBoarding.swhoWhatsApp);
 
   const isHome = pathname === '/';
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', height: 1 }}>
-      <Header />
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: 1,
+      }}
+    >
+      {!showWhatsApp && <Header />}
 
       <Main
         sx={{
@@ -62,9 +71,9 @@ function Header() {
         sx={{
           height: {
             xs: HEADER.H_MOBILE,
-            md: HEADER.H_DESKTOP + 30,
+            md: HEADER.H_DESKTOP,
           },
-          padding: '0px 50px',
+          padding: { xs: '50px 10px', lg: '0px 50px' },
           transition: theme.transitions.create(['height'], {
             easing: theme.transitions.easing.easeInOut,
             duration: theme.transitions.duration.shorter,

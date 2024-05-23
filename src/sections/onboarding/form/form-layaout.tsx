@@ -5,7 +5,7 @@ import { m } from 'framer-motion';
 import { useFormikContext } from 'formik';
 import { useEffect, useState } from 'react';
 import { Box } from 'src/components/Box/box-component';
-import { nextStep, setContentStep, setStep } from 'src/store/slices/onBoarding';
+import { nextStep, setContentStep, setStep, setSwhoWhatsApp } from 'src/store/slices/onBoarding';
 import { RootState } from 'src/store';
 import { useRouter } from 'src/routes/hooks';
 import { MotionViewport, varFade } from 'src/components/animate';
@@ -27,6 +27,7 @@ export default function OnboardingFormLayout({ children }: OnboardingFormLayoutP
   const seccionesForm = Object.entries(TSeccionForm).map(([key, value]) => value);
   const step = useSelector((state: RootState) => state.OnBoarding.step);
   const contentStep = useSelector((state: RootState) => state.OnBoarding.contentStep);
+  const showWhatsapp = useSelector((state: RootState) => state.OnBoarding.swhoWhatsApp);
 
   useEffect(() => {
     currentStepIsComplete();
@@ -93,7 +94,13 @@ export default function OnboardingFormLayout({ children }: OnboardingFormLayoutP
         }
 
         if (nextCondition === 'finish') {
-          router.replace('/onboarding-info');
+          return;
+        }
+
+        if (nextCondition === 'nextOptiomalStep') {
+          setPreviusOptions(currentStep);
+          dispatch(nextStep());
+          dispatch(setSwhoWhatsApp(true));
           return;
         }
 
@@ -153,38 +160,49 @@ export default function OnboardingFormLayout({ children }: OnboardingFormLayoutP
             minHeight: 'calc(100vh - 200px)',
             display: 'flex',
             flexDirection: 'column',
+            justifyContent: 'center',
           }}
         >
-          {children}
           <Box
             sx={{
               display: 'flex',
-              justifyContent: 'space-between',
-              padding: '20px 0',
+              flexDirection: 'column',
+              flex: 1,
             }}
           >
-            <Button
-              onClick={handleClickPrev}
-              variant="outlined"
-              sx={{
-                width: '156px',
-              }}
-            >
-              Anterior
-            </Button>
-            <Button
-              onClick={handleClickNext}
-              variant="contained"
-              color="secondary"
-              disabled={!isComplete}
-              sx={{
-                width: '156px',
-                height: '48px',
-              }}
-            >
-              Siguiente
-            </Button>
+            {children}
           </Box>
+          {!showWhatsapp && (
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                padding: '20px 0',
+              }}
+            >
+              <Button
+                onClick={handleClickPrev}
+                variant="outlined"
+                sx={{
+                  width: '156px',
+                }}
+              >
+                Anterior
+              </Button>
+              <Button
+                onClick={handleClickNext}
+                variant="contained"
+                color="secondary"
+                disabled={!isComplete}
+                sx={{
+                  width: '156px',
+                  height: '48px',
+                }}
+              >
+                Siguiente
+              </Button>
+            </Box>
+          )}
         </Box>
       </m.div>
     </Box>

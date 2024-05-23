@@ -1,6 +1,7 @@
 export interface OnboardingState {
   step: number;
   contentStep: number;
+  swhoWhatsApp: boolean;
 }
 
 export interface mudebuAIState {

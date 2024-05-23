@@ -143,20 +143,22 @@ const FormDataSteps: IFormDataOnboarding[] = [
           {
             id: uuidv4(),
             nameFORMIK: 'ageRange',
-            type: inputsOnboarding.select,
-            placeholder: 'Rango de Edad',
+            type: inputsOnboarding.number,
+            placeholder: 'Edad',
           },
           {
             id: uuidv4(),
             nameFORMIK: 'gender',
             type: inputsOnboarding.select,
             placeholder: 'Género',
+            options: ['Masculino', 'Femenino', 'No binario', 'Otro', 'Prefiero no decir'],
           },
           {
             id: uuidv4(),
             nameFORMIK: 'zipCode',
             type: inputsOnboarding.select,
             placeholder: 'País de Residencia',
+            options: ['México', 'Colombia', 'Argentina', 'Chile', 'Perú'],
           },
         ],
       },
@@ -184,12 +186,27 @@ const FormDataSteps: IFormDataOnboarding[] = [
             nameFORMIK: 'educationLevel',
             type: inputsOnboarding.select,
             placeholder: 'Nivel de Educación',
+            options: [
+              'Sin estudios formales',
+              'Educación secundaria',
+              'Formación profesional',
+              'Estudios universitarios (grado)',
+              'Posgrado (máster, doctorado)',
+            ],
           },
           {
             id: uuidv4(),
-            nameFORMIK: 'educationStatus',
+            nameFORMIK: 'employmentStatus',
             type: inputsOnboarding.select,
             placeholder: 'Situación Laboral',
+            options: [
+              'Estudiante',
+              'Empleado/a tiempo completo',
+              'Empleado/a tiempo parcial',
+              'Autónomo/a',
+              'Desempleado/a',
+              'Jubilado/a',
+            ],
           },
         ],
       },
@@ -215,12 +232,39 @@ const FormDataSteps: IFormDataOnboarding[] = [
             value: 'Selecciona las opciones que apliquen o añade la tuya en “Otros”.',
           },
         ],
-        nextCondition: 'nextStep',
+        nextCondition: 'nextOptiomalStep',
         fields: [
           {
             id: uuidv4(),
             nameFORMIK: 'subscriptionReasons',
             type: inputsOnboarding.multiChecbok,
+            placeholder: 'Nivel de Educación',
+          },
+        ],
+      },
+    ],
+  },
+
+  /// Seccion: Motivación de suscripción
+  {
+    id: uuidv4(),
+    title: TSeccionForm.whatsApp,
+    content: [
+      {
+        name: 'whatsapp',
+        texts: [
+          {
+            id: uuidv4(),
+            type: textTypeOnboarding.title,
+            value: '¿Quieres también recibir la ultimas noticas via WhatsApp?',
+          },
+        ],
+        nextCondition: 'finish',
+        fields: [
+          {
+            id: uuidv4(),
+            nameFORMIK: 'whatsapp',
+            type: inputsOnboarding.telfNumber,
             placeholder: 'Nivel de Educación',
           },
         ],

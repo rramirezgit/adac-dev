@@ -113,6 +113,7 @@ export default function OnBoardingMultiCheckbox({ nameFORMIK }: Props) {
       <TextField
         name={nameFORMIK}
         value={other}
+        placeholder="Otros: ¿Qué otras cosas te motivó a suscribirte a ADAC? Escribe aquí"
         onChange={(e) => {
           const oterValue = { label: e.target.value, value: '9' };
           setOther(e.target.value);

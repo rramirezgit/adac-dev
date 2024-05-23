@@ -6,6 +6,9 @@ import OnBoardingMultiButtons from './multi-buttons';
 import OnBoardingTextAndImage from './text-image';
 import OnBoardingSelect from './select';
 import OnBoardingMultiChecbox from './multiCheckbox';
+import WhatsAppView from '../../whatsApp-view/whatsApp';
+import WhatsAppInput from './WhatsAppInput';
+import InputNumber from './Input-number';
 
 interface InputsViewProps {
   field: FieldOnboarding;
@@ -34,5 +37,13 @@ export default function InputsView({ field }: InputsViewProps) {
 
   if (field.type === inputsOnboarding.multiChecbok) {
     return <OnBoardingMultiChecbox {...field} />;
+  }
+
+  if (field.type === inputsOnboarding.telfNumber) {
+    return <WhatsAppInput {...field} />;
+  }
+
+  if (field.type === inputsOnboarding.number) {
+    return <InputNumber {...field} />;
   }
 }

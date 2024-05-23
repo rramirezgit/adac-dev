@@ -2,6 +2,7 @@ export enum TSeccionForm {
   PersonalInfo = 'Información Personal',
   Educacion = 'Nivel de Educación',
   subscriptionReasons = 'Motivos de suscripción',
+  whatsApp = '',
 }
 
 export enum inputsOnboarding {
@@ -11,6 +12,8 @@ export enum inputsOnboarding {
   multiButtons = 'multiButtons',
   textAndImage = 'textAndImage',
   multiChecbok = 'multiChecbok',
+  telfNumber = 'telfNumber',
+  number = 'number',
 }
 
 export type buttonOnboarding = {
@@ -35,7 +38,8 @@ interface contentStepOnboarding {
     | { condition: (values: any) => {}; true: string; false: string }
     | 'nextStep'
     | 'nextContent'
-    | 'finish';
+    | 'finish'
+    | 'nextOptiomalStep';
   name: string;
 }
 
